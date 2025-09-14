@@ -43,10 +43,7 @@ Googleドライブ上のフォルダ構成
 1. プランナーから「**Assets/Model/model.fbx**を納品して」とタスクを受ける
 1. モデルを作成する
 1. Googleドライブの**Assets/Model/model.fbx**に納品する
-<iframe
-  src="https://drive.google.com/viewer?srcid=1mzjr4GUfMkLGBj0vXrZ1myY_whagT-bd&pid=explorer&efh=false&a=v&chrome=false&embedded=true" 
-  style="width:600px; height:500px;" 
-  frameborder="0"></iframe>
+<img width="1162" height="626" alt="スクリーンショット 2025-09-14 160500" src="https://github.com/user-attachments/assets/c86ddc11-2d96-4bd5-844b-bd1db33dc73d" />
 
 ## プログラマーの運用方法
 1. 管理者がgitignoreで特定フォルダ以下でmetaのみコミットされるようにします。
@@ -56,10 +53,7 @@ Googleドライブ上のフォルダ構成
 - その他
 2. 配布されたアプリを開く  
 ※使用できますがデザイン何もしてないプロトタイプの写真です
-<iframe
-  src="https://drive.google.com/viewer?srcid=1XTP0EcNUBs0F8Kv9tnVFgQtiY0OtmAh7&pid=explorer&efh=false&a=v&chrome=false&embedded=true" 
-  style="width:600px; height:500px;" 
-  frameborder="0"></iframe>
+<img width="1054" height="962" alt="スクリーンショット 2025-09-14 161404" src="https://github.com/user-attachments/assets/42d8edb3-fb8d-4fe8-b0ff-9add809b316c" />
 
 3. アプリの操作に従う
 1. Unityプロジェクトに**最新のアセットがコピー**されます。
