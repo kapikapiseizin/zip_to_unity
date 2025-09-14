@@ -46,7 +46,7 @@ Googleドライブ上のフォルダ構成
 <img width="1162" height="626" alt="スクリーンショット 2025-09-14 160500" src="https://github.com/user-attachments/assets/c86ddc11-2d96-4bd5-844b-bd1db33dc73d" />
 
 ## プログラマーの運用方法
-1. 管理者がgitignoreで特定フォルダ以下でmetaのみコミットされるようにします。
+1. 管理者がgitignoreで特定フォルダ以下で.metaファイルのみコミットされるようにします。
 - Assets/Model
 - Assets/Texture
 - Assets/Sound
@@ -61,5 +61,6 @@ Googleドライブ上のフォルダ構成
 **Assets/Model/model.fbx**をインポートします。
 1. 作業します。
 1. コミット時にアセットのmetaのみ上がっていることを確認します。
-1. 他のメンバーはmetaファイルがリモートリポジトリに上がるため  
+1. 他のメンバーは.metaファイルがリモートリポジトリに上がるため  
 **アプリの操作以外にインポートは不要**です。
+
