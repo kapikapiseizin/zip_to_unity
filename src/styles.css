@@ -1,0 +1,17 @@
+.gdrive-screenshot {
+    display: flex;
+    width: 50%;
+}
+
+.gdrive-screenshot img {
+    width:50%;
+}
+
+.unity-screenshot {
+    display: flex;
+    width: 40%;
+}
+
+.unity-screenshot img {
+    width: 100%;
+}
