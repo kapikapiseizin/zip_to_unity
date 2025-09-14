@@ -55,7 +55,9 @@ async function executeCopy()
   let unityFolder = document.getElementById('unity-folderpath').textContent; 
 
   // ボタンを処理中の表示にする
-  document.getElementById("copy-button").textContent = "実行中";
+  let button = document.getElementById("copy-button");
+  button.textContent = "実行中";
+  button.disabled = true;
 
   // コピーを実行
   const result = await invoke("copy_zip_to_unity", {zipFile: zipFile, unityFolder: unityFolder});
@@ -66,7 +68,8 @@ async function executeCopy()
   alert(msg);
 
   // ボタンの表示を戻す
-  document.getElementById("copy-button").textContent = "コピーを実行";
+  button.textContent = "コピーを実行";
+  button.disabled = false;
 }
 
 // htmlの要素とバインディング
