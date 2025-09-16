@@ -15,3 +15,15 @@
 .unity-screenshot img {
     width: 100%;
 }
+
+.round-button {
+    padding: 0px 20px;
+    display: inline-flex;
+    height:30px;
+    line-height:30px;
+    background:#0033ff;
+    color:#fff;
+    border-radius:25px;
+    text-align:center;
+    border:none;
+}

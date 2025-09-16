@@ -31,7 +31,7 @@
           <p>ダウンロードしたzipファイルを参照します</p>
           <label for="zip-filepath">zip:</label>
           <span id="zip-filepath"></span>
-          <button onclick="selectZipFile()">参照</button>
+          <button onclick="selectZipFile()" class="round-button">参照</button>
         </li>
         <li>
           <p>Unityプロジェクトのフォルダ<small>(Assetフォルダがある階層)</small>を参照します</p>
@@ -41,11 +41,11 @@
           </div>
           <label for="unity-folderpath">Unityフォルダ:</label>
           <span id="unity-folderpath"></span>
-          <button onclick="selectUnityFolder()">参照</button>
+          <button onclick="selectUnityFolder()" class="round-button">参照</button>
         </li>
         <li>
           <p>実行ボタンでコピーを開始します</p>
-          <button id="copy-button" onclick="executeCopy()">コピーを実行</button>
+          <button id="copy-button" onclick="executeCopy()" class="round-button">コピーを実行</button>
         </li>
       </ol>
     </main>
