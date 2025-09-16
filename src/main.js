@@ -76,3 +76,15 @@ async function executeCopy()
 window.selectZipFile = selectZipFile;
 window.selectUnityFolder = selectUnityFolder;
 window.executeCopy = executeCopy;
+
+// json読込
+fetch('link.json')
+  .then(response => response.json())
+  .then(data => {
+    // URL
+    const driveURL = data.url;
+
+    // 要素を書き換え
+    document.getElementById("google-drive-link").href = driveURL;
+  })
+  .catch(error => console.error('エラー:', error));
