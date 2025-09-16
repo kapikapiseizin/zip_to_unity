@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ja">
   <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="styles.css" />
@@ -10,44 +10,56 @@
   <body>
     <main>
       <h1>Zip To Unity</h1>
-      <p>
+      <p id="app-description">
        Assetsフォルダのあるzipファイルを解凍して<br>
        UnityプロジェクトのAssetフォルダに展開します
       </p>
-      <h2>操作方法</h2>
-      <ol>
-        <li><p>Unityプロジェクトを閉じます</p></li>
-        <li>
-          <p><a href="https://drive.google.com/drive/folders/1ycOZTqnDIRzXL43RSJt7tsebUc2Qip5-?usp=sharing">
-            Googleドライブ</a>にアクセスして<strong>Assetsフォルダ</strong>をダウンロードします。</p>
-            <div class="gdrive-screenshot">
-              <img alt="Assetsフォルダをダウンロードする画面のスクリーンショット"
-              src = "screenshots/how_to_download_0.png" />
-              <img alt="Assetsフォルダをダウンロードする画面のスクリーンショット"
-              src = "screenshots/how_to_download_1.png" />
-            </div>
-        </li>
-        <li>
-          <p>ダウンロードしたzipファイルを参照します</p>
-          <label for="zip-filepath">zip:</label>
-          <span id="zip-filepath"></span>
-          <button onclick="selectZipFile()" class="round-button">参照</button>
-        </li>
-        <li>
-          <p>Unityプロジェクトのフォルダ<small>(Assetフォルダがある階層)</small>を参照します</p>
-          <div class="unity-screenshot">
-            <img alt="プロジェクトフォルダのスクリーンショット"
-            src="screenshots/where_unity.png" />
+      <div class="how-to-background">
+        <h2>操作方法</h2>
+        <ol>
+          <div class="how-to-element-left">
+            <li><p>Unityプロジェクトを閉じます</p></li>
           </div>
-          <label for="unity-folderpath">Unityフォルダ:</label>
-          <span id="unity-folderpath"></span>
-          <button onclick="selectUnityFolder()" class="round-button">参照</button>
-        </li>
-        <li>
-          <p>実行ボタンでコピーを開始します</p>
-          <button id="copy-button" onclick="executeCopy()" class="round-button">コピーを実行</button>
-        </li>
-      </ol>
+          <div class="how-to-element-right">
+            <li>
+              <p><a href="https://drive.google.com/drive/folders/1ycOZTqnDIRzXL43RSJt7tsebUc2Qip5-?usp=sharing">
+              Googleドライブ</a>にアクセスして<strong>Assetsフォルダ</strong>をダウンロードします。</p>
+              <div class="gdrive-screenshot">
+                <img alt="Assetsフォルダをダウンロードする画面のスクリーンショット"
+                src = "screenshots/how_to_download_0.png" />
+                <img alt="Assetsフォルダをダウンロードする画面のスクリーンショット"
+                src = "screenshots/how_to_download_1.png" />
+              </div>
+            </li>
+          </div>
+          <div class="how-to-element-left">
+            <li>
+              <p>ダウンロードしたzipファイルを参照します</p>
+              <label for="zip-filepath">zip:</label>
+              <span id="zip-filepath"></span>
+              <button onclick="selectZipFile()" class="round-button">参照</button>
+            </li>
+          </div>
+          <div class="how-to-element-right">
+            <li>
+              <p>Unityプロジェクトのフォルダ<small>(Assetフォルダがある階層)</small>を参照します</p>
+              <div class="unity-screenshot">
+                <img alt="プロジェクトフォルダのスクリーンショット"
+                src="screenshots/where_unity.png" />
+              </div>
+              <label for="unity-folderpath">Unityフォルダ:</label>
+              <span id="unity-folderpath"></span>
+              <button onclick="selectUnityFolder()" class="round-button">参照</button>
+            </li>
+          </div>
+          <div class="how-to-element-left">
+            <li>
+              <p>実行ボタンでコピーを開始します</p>
+              <button id="copy-button" onclick="executeCopy()" class="round-button">コピーを実行</button>
+            </li>
+          </div>
+        </ol>
+      </div>
     </main>
     <script type="module" src="/main.js"></script>
   </body>
