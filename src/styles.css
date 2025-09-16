@@ -1,15 +1,14 @@
 .gdrive-screenshot {
-    display: flex;
     border-radius: 10px;
 }
 
 .gdrive-screenshot img {
-    width:50%;
+    width: 100%;
 }
 
 .unity-screenshot {
     display: flex;
-    width: 70%;
+    width: 90%;
 }
 
 .unity-screenshot img {
@@ -71,22 +70,38 @@ strong {
 }
 
 .how-to-element-left {
+    width: 60%;
+    display: flex;
+}
+
+.how-to-element-left li {
     background-color: white;
     border-radius: 10px;
     padding: 20px;
     margin-top: 10px;
     margin-left: 20px;
-    width: 40%;
 }
 
 .how-to-element-right {
+    width: 60%;
+    display: flex;
+    margin-left: auto;
+}
+
+.how-to-element-right li {
     background-color: white;
     border-radius: 10px;
     padding: 20px;
     margin-top: 10px;
-    margin-left: auto;
     margin-right: 20px;
-    width: 40%;
+}
+
+.how-to-index {
+    color: white;
+    font-size: 100px;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-weight: bold;
 }
 
 ol {
