@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 /src-tauri/temp/*
-/src/link.json
+\src\link.json
