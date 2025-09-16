@@ -18,17 +18,16 @@
 .round-button {
     padding: 0px 20px;
     display: inline-flex;
-    height:30px;
-    line-height:30px;
-    background:#0033ff;
-    color:#fff;
-    border-radius:25px;
-    text-align:center;
-    border:none;
+    height: 30px;
+    line-height: 30px;
+    background: #0033ff;
+    color: #fff;
+    border-radius: 25px;
+    text-align: center;
+    border: none;
 }
 
-.round-button:hover
-{
+.round-button:hover {
     background-color: #99ccff;
 }
 
@@ -37,15 +36,17 @@ body {
 }
 
 h1 {
-   font-size: 100px;
-   color : #0033ff;
-   margin-top: 0;
-   margin-bottom: 0;
+    font-size: 100px;
+    color: #0033ff;
+    margin-top: 0;
+    margin-bottom: 0;
+    transition: 0.2s ease-in;
 }
 
 h2 {
     font-size: 70px;
     color: white;
+    background-color: #0033ff;
     margin: 0;
     padding-top: 20px;
     padding-left: 20px;
@@ -55,6 +56,8 @@ p {
     font-size: 20px;
     margin-top: 0;
     margin-bottom: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 strong {
@@ -65,21 +68,25 @@ strong {
     margin-left: 20px;
 }
 
-.how-to-background {
+.how-to-column {
     background-color: #0033ff;
+    transition: 0.2s ease-in;
 }
+
 
 .how-to-element-left {
-    width: 60%;
     display: flex;
+    padding-right: 0;
+    width: 60%;
 }
 
-.how-to-element-left li {
+.how-to-desc-left {
     background-color: white;
-    border-radius: 10px;
+    border-radius: 50px;
     padding: 20px;
     margin-top: 10px;
     margin-left: 20px;
+    flex-grow: 1;
 }
 
 .how-to-element-right {
@@ -88,17 +95,18 @@ strong {
     margin-left: auto;
 }
 
-.how-to-element-right li {
+.how-to-desc-right {
     background-color: white;
-    border-radius: 10px;
+    border-radius: 50px;
     padding: 20px;
     margin-top: 10px;
     margin-right: 20px;
+    flex-grow: 1;
 }
 
 .how-to-index {
     color: white;
-    font-size: 100px;
+    font-size: 200px;
     margin-top: auto;
     margin-bottom: auto;
     font-weight: bold;
@@ -107,6 +115,15 @@ strong {
 ol {
     list-style-type: none;
     padding-left: 0px;
-    padding-bottom: 20px;
+    padding-bottom: 0px;
+    margin-top: 0;
     margin-bottom: 0;
+}
+
+.how-to-column:hover {
+    background-color: #99ccff;
+}
+
+.how-to-column:hover .how-to-index {
+    color: #0033ff;
 }
