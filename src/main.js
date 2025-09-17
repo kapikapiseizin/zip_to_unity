@@ -2,13 +2,13 @@
 const { invoke } = window.__TAURI__.core;
 
 // ファイルダイアログを扱う関数
-const { open, save } = window.__TAURI__.dialog;
+const { open: openDialog } = window.__TAURI__.dialog;
 
 /**
  * @breif zipファイルを開く
 */
 function selectZipFile() {
-  open({
+  openDialog({
     filters: [
       { name: 'ZIP Archive', extensions: ['zip'] },
     ],
@@ -25,7 +25,7 @@ function selectZipFile() {
  * @breif Unityプロジェクトを開く
 */
 function selectUnityFolder() {
-  open({
+  openDialog({
     directory: true,
     multiple: false,
   }).then(async folder => {
@@ -71,13 +71,19 @@ async function executeCopy() {
 /**
  * @breif リンクを押す
 */
-function pushLink(id) {
+async function pushLink(event, id) {
+  event.preventDefault();
   let url = document.getElementById(id).href;
 
   const regex = /^https:\/\/drive\.google\.com\/.*/;
 
   if (regex.test(url)) {
-    alert("アクセスしました。");
+    const result = await invoke("open_url", { url: url });
+    let flag = result[0];
+
+    if (false == flag) {
+      alert("ブラウザを開けませんでした。");
+    }
   }
 }
 
