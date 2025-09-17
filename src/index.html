@@ -17,72 +17,82 @@
     </p>
     <h2>使い方</h2>
     <ol>
-      <div class="how-to-column">
-        <div class="how-to-element-left">
-          <div class="how-to-desc-left">
-            <li>
-              <p>Unityプロジェクトを閉じます</p>
-            </li>
-          </div>
-          <p class="how-to-index">.1</p>
-        </div>
-      </div>
-      <div class="how-to-column">
-        <div class="how-to-element-right">
-          <p class="how-to-index">2.</p>
-          <div class="how-to-desc-right">
-            <li>
-              <p><a href="" id="google-drive-link" onclick="pushLink('google-drive-link')">Googleドライブ</a>にアクセスして<br>
-                <strong>Assetsフォルダ</strong>をダウンロードします。
-              </p>
-              <div class="gdrive-screenshot">
-                <img alt="Assetsフォルダをダウンロードする画面のスクリーンショット" src="screenshots/how_to_download_0.png" />
-                <img alt="Assetsフォルダをダウンロードする画面のスクリーンショット" src="screenshots/how_to_download_1.png" />
+      <li>
+        <div class="how-to-column">
+          <div class="how-to-element-left">
+            <p class="how-to-index">1.</p>
+            <div class="how-to-desc-background">
+              <div class="how-to-desc">
+                <p>Unityプロジェクトを閉じます</p>
               </div>
-            </li>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="how-to-column">
-        <div class="how-to-element-left">
-          <div class="how-to-desc-left">
-            <li>
-              <p>ダウンロードしたzipファイルを参照します</p>
-              <label for="zip-filepath">zip:</label>
-              <span id="zip-filepath"></span>
-              <button onclick="selectZipFile()" class="round-button">参照</button>
-            </li>
-          </div>
-          <p class="how-to-index">.3</p>
-        </div>
-      </div>
-      <div class="how-to-column">
-        <div class="how-to-element-right">
-          <p class="how-to-index">4.</p>
-          <div class="how-to-desc-right">
-            <li>
-              <p>Unityプロジェクトのフォルダ<br><small>(Assetフォルダがある階層)</small>を参照します</p>
-              <div class="unity-screenshot">
-                <img alt="プロジェクトフォルダのスクリーンショット" src="screenshots/where_unity.png" />
+      </li>
+      <li>
+        <div class="how-to-column">
+          <div class="how-to-element-right">
+            <p class="how-to-index">2.</p>
+            <div class="how-to-desc-background">
+              <div class="how-to-desc">
+                <p><a href="" id="google-drive-link" onclick="pushLink('google-drive-link')">Googleドライブ</a>にアクセスして
+                  <strong>Assetsフォルダ</strong>をダウンロードします。
+                </p>
               </div>
-              <label for="unity-folderpath">Unityフォルダ:</label>
-              <span id="unity-folderpath"></span>
-              <button onclick="selectUnityFolder()" class="round-button">参照</button>
-            </li>
+            </div>
+          </div>
+          <div class="gdrive-screenshot">
+            <img alt="Assetsフォルダをダウンロードする画面のスクリーンショット" src="screenshots/how_to_download_0.png" />
+            <img alt="Assetsフォルダをダウンロードする画面のスクリーンショット" src="screenshots/how_to_download_1.png" />
           </div>
         </div>
-      </div>
-      <div class="how-to-column">
-        <div class="how-to-element-left">
-          <div class="how-to-desc-left">
-            <li>
-              <p>実行ボタンでコピーを開始します</p>
-              <button id="copy-button" onclick="executeCopy()" class="round-button">コピーを実行</button>
-            </li>
+      </li>
+      <li>
+        <div class="how-to-column">
+          <div class="how-to-element-left">
+            <p class="how-to-index">3.</p>
+            <div class="how-to-desc-background">
+              <div class="how-to-desc">
+                <p>ダウンロードしたzipファイルを参照します</p>
+                <label for="zip-filepath">zip:</label>
+                <span id="zip-filepath"></span>
+                <button onclick="selectZipFile()" class="round-button">参照</button>
+              </div>
+            </div>
           </div>
-          <p class="how-to-index">.5</p>
         </div>
-      </div>
+      </li>
+      <li>
+        <div class="how-to-column">
+          <div class="how-to-element-right">
+            <p class="how-to-index">4.</p>
+            <div class="how-to-desc-background">
+              <div class="how-to-desc">
+                <p>Unityプロジェクトのフォルダ<small>(Assetフォルダがある階層)</small>を参照します</p>
+                <label for="unity-folderpath">Unityフォルダ:</label>
+                <span id="unity-folderpath"></span>
+                <button onclick="selectUnityFolder()" class="round-button">参照</button>
+              </div>
+            </div>
+          </div>
+          <div class="unity-screenshot">
+            <img alt="プロジェクトフォルダのスクリーンショット" src="screenshots/where_unity.png" />
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="how-to-column">
+          <div class="how-to-element-left">
+            <p class="how-to-index">5.</p>
+            <div class="how-to-desc-background">
+              <div class="how-to-desc">
+                <p>実行ボタンでコピーを開始します</p>
+                <button id="copy-button" onclick="executeCopy()" class="round-button">コピーを実行</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
     </ol>
   </main>
   <script type="module" src="/main.js"></script>

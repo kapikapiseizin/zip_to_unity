@@ -1,20 +1,3 @@
-.gdrive-screenshot {
-    border-radius: 10px;
-}
-
-.gdrive-screenshot img {
-    width: 100%;
-}
-
-.unity-screenshot {
-    display: flex;
-    width: 90%;
-}
-
-.unity-screenshot img {
-    width: 100%;
-}
-
 .round-button {
     padding: 0px 20px;
     display: inline-flex;
@@ -36,8 +19,8 @@ body {
 }
 
 h1 {
-    font-size: 160px;
-    color: #0033ff;
+    font-size: 100px;
+    color: #06f;
     margin-top: 0;
     margin-bottom: 0;
     transition: 0.2s ease-in;
@@ -46,7 +29,7 @@ h1 {
 h2 {
     font-size: 70px;
     color: white;
-    background-color: #0033ff;
+    background-color: #06f;
     margin: 0;
     padding-top: 20px;
     padding-left: 20px;
@@ -68,54 +51,6 @@ strong {
     margin-left: 20px;
 }
 
-.how-to-column {
-    background-color: #0033ff;
-    transition: 0.2s ease-in;
-}
-
-
-.how-to-element-left {
-    display: flex;
-    padding-right: 0;
-    width: 60%;
-}
-
-.how-to-desc-left {
-    background-color: white;
-    border-radius: 50px;
-    padding: 20px;
-    margin-top: 20px;
-    margin-left: 20px;
-    margin-bottom: 20px;
-    flex-grow: 1;
-    box-shadow: 6px 6px 15px #0033ff;
-}
-
-.how-to-element-right {
-    width: 60%;
-    display: flex;
-    margin-left: auto;
-}
-
-.how-to-desc-right {
-    background-color: white;
-    border-radius: 50px;
-    padding: 20px;
-    margin-top: 20px;
-    margin-right: 20px;
-    margin-bottom: 20px;
-    flex-grow: 1;
-    box-shadow: 6px 6px 15px #0033ff;
-}
-
-.how-to-index {
-    color: white;
-    font-size: 200px;
-    margin-top: auto;
-    margin-bottom: auto;
-    font-weight: bold;
-}
-
 ol {
     list-style-type: none;
     padding-left: 0px;
@@ -124,10 +59,63 @@ ol {
     margin-bottom: 0;
 }
 
-.how-to-column:hover {
-    background-color: white;
+.how-to-column {
+    transition: 0.2s ease-in;
+    padding-left: 20px;
+    background-color: #06f;
 }
 
-.how-to-column:hover .how-to-index {
-    color: #0033ff;
+
+.how-to-element-left {
+    display: flex;
+}
+
+.how-to-element-right {
+    display: flex;
+}
+
+.how-to-desc-background {
+    background-color: white;
+    border-radius: 20px;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+
+.how-to-index {
+    color: white;
+    font-size: 60px;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-weight: bold;
+}
+
+.gdrive-screenshot {
+    border-radius: 20px;
+    display: flex;
+    width: 80%;
+    margin-left: 100px;
+    overflow: hidden;
+}
+
+.gdrive-screenshot img {
+    width: 50%;
+}
+
+.unity-screenshot {
+    border-radius: 20px;
+    width: 50%;
+    margin-left: 100px;
+    overflow: hidden;
+}
+
+.unity-screenshot img {
+    width: 100%;
 }
