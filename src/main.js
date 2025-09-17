@@ -7,11 +7,10 @@ const { open, save } = window.__TAURI__.dialog;
 /**
  * @breif zipファイルを開く
 */
-function selectZipFile()
-{
+function selectZipFile() {
   open({
     filters: [
-        { name: 'ZIP Archive', extensions: ['zip'] },
+      { name: 'ZIP Archive', extensions: ['zip'] },
     ],
     multiple: false,
   }).then(async file => {
@@ -19,17 +18,16 @@ function selectZipFile()
     let pathElement = document.getElementById('zip-filepath');
     pathElement.textContent = file;
   });
-  
+
 }
 
 /**
  * @breif Unityプロジェクトを開く
 */
-function selectUnityFolder()
-{
+function selectUnityFolder() {
   open({
-    directory : true,
-    multiple : false,
+    directory: true,
+    multiple: false,
   }).then(async folder => {
     // 要素にパスを格納
     let folderElement = document.getElementById('unity-folderpath');
@@ -40,19 +38,17 @@ function selectUnityFolder()
 /**
  * @breif zipからUnityプロジェクトへのコピーを実行
  */
-async function executeCopy()
-{
+async function executeCopy() {
   // Unityを閉じたか確認
   let checkUnityClose = prompt("本当にUnityを閉じましたか? (Y/N)");
-  if(checkUnityClose != "Y")
-  {
+  if (checkUnityClose != "Y") {
     alert("Unityを閉じてください");
     return;
   }
 
   // パスを取得
   let zipFile = document.getElementById('zip-filepath').textContent;
-  let unityFolder = document.getElementById('unity-folderpath').textContent; 
+  let unityFolder = document.getElementById('unity-folderpath').textContent;
 
   // ボタンを処理中の表示にする
   let button = document.getElementById("copy-button");
@@ -60,7 +56,7 @@ async function executeCopy()
   button.disabled = true;
 
   // コピーを実行
-  const result = await invoke("copy_zip_to_unity", {zipFile: zipFile, unityFolder: unityFolder});
+  const result = await invoke("copy_zip_to_unity", { zipFile: zipFile, unityFolder: unityFolder });
 
   // 結果を出力
   let flag = result[0];
@@ -72,10 +68,24 @@ async function executeCopy()
   button.disabled = false;
 }
 
+/**
+ * @breif リンクを押す
+*/
+function pushLink(id) {
+  let url = document.getElementById(id).href;
+
+  const regex = /^https:\/\/drive\.google\.com\/.*/;
+
+  if (regex.test(url)) {
+    alert("アクセスしました。");
+  }
+}
+
 // htmlの要素とバインディング
 window.selectZipFile = selectZipFile;
 window.selectUnityFolder = selectUnityFolder;
 window.executeCopy = executeCopy;
+window.pushLink = pushLink;
 
 // json読込
 fetch('link.json')
