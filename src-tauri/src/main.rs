@@ -168,6 +168,14 @@ fn copy_zip_to_unity(zip_file: &str, unity_folder: &str) -> (bool, String) {
         }
     }
 
+    // tempフォルダを削除
+    match fs::remove_dir_all(temp_folder_path) {
+        Ok(()) => {}
+        Err(_) => {
+            return (false, String::from("tempフォルダの削除に失敗"));
+        }
+    }
+
     return (true, String::from("正常に終了しました"));
 }
 
