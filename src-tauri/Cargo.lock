@@ -5666,6 +5666,7 @@ dependencies = [
 name = "zip_to_unity"
 version = "0.1.0"
 dependencies = [
+ "dirs",
  "fs_extra",
  "serde",
  "serde_json",

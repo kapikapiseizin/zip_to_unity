@@ -98,11 +98,26 @@ fn is_exists_folder(path: &str, search_name: &str) -> bool {
  */
 #[tauri::command]
 fn copy_zip_to_unity(zip_file: &str, unity_folder: &str) -> (bool, String) {
-    let temp_folder = "./temp"; // 作業用フォルダ
+    // Downloads/tempフォルダ
+    let temp_folder_buf = match dirs::download_dir() {
+        Some(download_path) => download_path.join("zip_to_unity_temp"),
+        None => {
+            return (false, String::from("ダウンロードフォルダの取得に失敗"));
+        }
+    };
+
+    // tempフォルダを文字列に変換
+    let temp_folder = match temp_folder_buf.to_str() {
+        Some(path_str) => path_str,
+        None => {
+            return (false, String::from("tempフォルダのパス変換に失敗"));
+        }
+    };
+
     let assets_folder_name = "Assets"; // Assetsフォルダ
 
     // 作業フォルダをリセット
-    match reset_folder(temp_folder) {
+    match reset_folder(&temp_folder) {
         Ok(()) => {}
         Err(error) => {
             return (
