@@ -2,35 +2,32 @@
 const { invoke } = window.__TAURI__.core;
 
 // ファイルダイアログを扱う関数
-const { open: openDialog } = window.__TAURI__.dialog;
+const { open: openDialog, ask: askDialog } = window.__TAURI__.dialog;
 
 /**
  * @breif zipファイルを開く
-*/
+ */
 function selectZipFile() {
   openDialog({
-    filters: [
-      { name: 'ZIP Archive', extensions: ['zip'] },
-    ],
+    filters: [{ name: "ZIP Archive", extensions: ["zip"] }],
     multiple: false,
-  }).then(async file => {
+  }).then(async (file) => {
     // 要素にパスを格納
-    let pathElement = document.getElementById('zip-filepath');
+    let pathElement = document.getElementById("zip-filepath");
     pathElement.textContent = file;
   });
-
 }
 
 /**
  * @breif Unityプロジェクトを開く
-*/
+ */
 function selectUnityFolder() {
   openDialog({
     directory: true,
     multiple: false,
-  }).then(async folder => {
+  }).then(async (folder) => {
     // 要素にパスを格納
-    let folderElement = document.getElementById('unity-folderpath');
+    let folderElement = document.getElementById("unity-folderpath");
     folderElement.textContent = folder;
   });
 }
@@ -40,15 +37,18 @@ function selectUnityFolder() {
  */
 async function executeCopy() {
   // Unityを閉じたか確認
-  let checkUnityClose = prompt("本当にUnityを閉じましたか? (Y/N)");
-  if (checkUnityClose != "Y") {
+  let checkUnityClose = await askDialog("本当にUnityを閉じましたか?", {
+    title: "zip_to_unity",
+    kind: "warning",
+  });
+  if (!checkUnityClose) {
     alert("Unityを閉じてください");
     return;
   }
 
   // パスを取得
-  let zipFile = document.getElementById('zip-filepath').textContent;
-  let unityFolder = document.getElementById('unity-folderpath').textContent;
+  let zipFile = document.getElementById("zip-filepath").textContent;
+  let unityFolder = document.getElementById("unity-folderpath").textContent;
 
   // ボタンを処理中の表示にする
   let button = document.getElementById("copy-button");
@@ -56,7 +56,10 @@ async function executeCopy() {
   button.disabled = true;
 
   // コピーを実行
-  const result = await invoke("copy_zip_to_unity", { zipFile: zipFile, unityFolder: unityFolder });
+  const result = await invoke("copy_zip_to_unity", {
+    zipFile: zipFile,
+    unityFolder: unityFolder,
+  });
 
   // 結果を出力
   let flag = result[0];
@@ -70,7 +73,7 @@ async function executeCopy() {
 
 /**
  * @breif リンクを押す
-*/
+ */
 async function pushLink(event, id) {
   event.preventDefault();
   let url = document.getElementById(id).href;
@@ -94,13 +97,13 @@ window.executeCopy = executeCopy;
 window.pushLink = pushLink;
 
 // json読込
-fetch('link.json')
-  .then(response => response.json())
-  .then(data => {
+fetch("link.json")
+  .then((response) => response.json())
+  .then((data) => {
     // URL
     const driveURL = data.url;
 
     // 要素を書き換え
     document.getElementById("google-drive-link").href = driveURL;
   })
-  .catch(error => console.error('エラー:', error));
+  .catch((error) => console.error("エラー:", error));
