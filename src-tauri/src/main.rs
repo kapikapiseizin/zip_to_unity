@@ -27,13 +27,15 @@ fn reset_folder(path: &str) -> Result<(), Box<dyn std::error::Error>> {
 /**
  * @param zip_file zipファイルのパス
  * @param dest_folder zipファイルの解凍先フォルダ
+ * @param unity_folder unityプロジェクトのフォルダ
+ * @return 解凍しなかったファイルのリスト
  */
 #[tauri::command]
 fn extract_zip(
     zip_file: &str,
     dest_folder: &str,
     unity_folder: &str,
-) -> Result<(), Box<dyn std::error::Error>> {
+) -> Result<Vec<String>, Box<dyn std::error::Error>> {
     // パスを作成
     let dest_path = Path::new(dest_folder);
     let unity_path = Path::new(unity_folder);
@@ -42,6 +44,9 @@ fn extract_zip(
     let file = fs::File::open(zip_file)?;
     // zipArchiveに変換
     let mut archive = ZipArchive::new(file)?;
+
+    // 解凍しなかったファイルのリスト
+    let mut uncopy_files = Vec::new();
 
     // アーカイブ内の各ファイルをループで処理
     for file_index in 0..archive.len() {
@@ -78,6 +83,8 @@ fn extract_zip(
             let meta_str = format!("{}.meta", unity_path.join(&filename).display());
             let meta_path = Path::new(&meta_str);
             if !meta_path.exists() {
+                // コピーしなかったファイルを記録
+                uncopy_files.push(filename.display().to_string());
                 continue;
             }
 
@@ -95,7 +102,7 @@ fn extract_zip(
         }
     }
 
-    return Ok(());
+    return Ok(uncopy_files);
 }
 
 /**
@@ -114,6 +121,23 @@ fn is_exists_folder(path: &str, search_name: &str) -> bool {
 
     // パスがフォルダとして存在するか
     return join_path.is_dir();
+}
+
+fn join_uncopy_files(src: &str, uncopy_files: &Vec<String>) -> String {
+    let mut text = String::from(src);
+    if uncopy_files.is_empty() {
+        return text;
+    }
+
+    text.push_str("\n");
+    text.push_str("====================================\n");
+    text.push_str("metaファイルがないため以下のファイルは除外されました\n");
+    for file in uncopy_files {
+        text.push_str(file);
+        text.push('\n');
+    }
+
+    text
 }
 
 /**
@@ -153,16 +177,18 @@ fn copy_zip_to_unity(zip_file: &str, unity_folder: &str) -> (bool, String) {
         }
     }
 
+    // コピーしなかったファイル
+
     // zipファイルを展開
-    match extract_zip(zip_file, temp_folder, unity_folder) {
-        Ok(()) => {}
+    let uncopy_files = match extract_zip(zip_file, temp_folder, unity_folder) {
+        Ok(files) => files,
         Err(error) => {
             return (
                 false,
                 format!("{}{}{}", zip_file, "解凍エラー\n", error.to_string()),
             );
         }
-    }
+    };
 
     // zipファイルの直下にAssetsがあるか
     if !is_exists_folder(temp_folder, assets_folder_name) {
@@ -202,7 +228,10 @@ fn copy_zip_to_unity(zip_file: &str, unity_folder: &str) -> (bool, String) {
         }
     }
 
-    return (true, String::from("正常に終了しました"));
+    return (
+        true,
+        join_uncopy_files("正常に処理されました\n", &uncopy_files),
+    );
 }
 
 /**
