@@ -29,9 +29,14 @@ fn reset_folder(path: &str) -> Result<(), Box<dyn std::error::Error>> {
  * @param dest_folder zipファイルの解凍先フォルダ
  */
 #[tauri::command]
-fn extract_zip(zip_file: &str, dest_folder: &str) -> Result<(), Box<dyn std::error::Error>> {
+fn extract_zip(
+    zip_file: &str,
+    dest_folder: &str,
+    unity_folder: &str,
+) -> Result<(), Box<dyn std::error::Error>> {
     // パスを作成
     let dest_path = Path::new(dest_folder);
+    let unity_path = Path::new(unity_folder);
 
     // zipファイルを読込
     let file = fs::File::open(zip_file)?;
@@ -43,17 +48,38 @@ fn extract_zip(zip_file: &str, dest_folder: &str) -> Result<(), Box<dyn std::err
         // アーカイブから要素を取り出す
         let mut file = archive.by_index(file_index)?;
 
-        // 解凍先/ファイルパスのパスを安全に取得
-        let outpath = match file.enclosed_name() {
-            Some(path) => dest_path.join(path),
+        // ファイル名を安全に取得
+        let filename = match file.enclosed_name() {
+            Some(path) => path,
             None => continue,
         };
+
+        // 解凍先/ファイルパスのパスを取得
+        let outpath = dest_path.join(&filename);
 
         if file.name().ends_with('/') {
             // フォルダなら作成
             fs::create_dir_all(&outpath)?;
         } else {
             // パスがファイルの場合
+
+            // ファイルの拡張子を取得
+            let file_extension = match outpath.extension() {
+                Some(ext) => ext,
+                None => continue,
+            };
+
+            // メタファイルはコピーしない
+            if file_extension == "meta" {
+                continue;
+            }
+
+            // メタファイルが存在しないなら除外
+            let meta_str = format!("{}.meta", unity_path.join(&filename).display());
+            let meta_path = Path::new(&meta_str);
+            if !meta_path.exists() {
+                continue;
+            }
 
             // 親ディレクトリを取得
             if let Some(p) = outpath.parent() {
@@ -128,7 +154,7 @@ fn copy_zip_to_unity(zip_file: &str, unity_folder: &str) -> (bool, String) {
     }
 
     // zipファイルを展開
-    match extract_zip(zip_file, temp_folder) {
+    match extract_zip(zip_file, temp_folder, unity_folder) {
         Ok(()) => {}
         Err(error) => {
             return (
