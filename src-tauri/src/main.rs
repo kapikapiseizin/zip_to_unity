@@ -123,6 +123,12 @@ fn is_exists_folder(path: &str, search_name: &str) -> bool {
     return join_path.is_dir();
 }
 
+/**
+ * @brief srcにコピーしなかったファイル名を結合する
+ * @param src ファイル名の結合先
+ * @param uncopy_files コピーしなかったファイル名のリスト
+ * @return ファイル名の結合結果
+ */
 fn join_uncopy_files(src: &str, uncopy_files: &Vec<String>) -> String {
     let mut text = String::from(src);
     if uncopy_files.is_empty() {
