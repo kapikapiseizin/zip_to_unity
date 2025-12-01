@@ -30,7 +30,6 @@ fn reset_folder(path: &str) -> Result<(), Box<dyn std::error::Error>> {
  * @param unity_folder unityプロジェクトのフォルダ
  * @return 解凍しなかったファイルのリスト
  */
-#[tauri::command]
 fn extract_zip(
     zip_file: &str,
     dest_folder: &str,
