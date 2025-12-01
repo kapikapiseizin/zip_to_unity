@@ -181,6 +181,56 @@ fn select_filepath(src_folder: &Path) -> std::io::Result<Vec<String>> {
 }
 
 /**
+ * metaファイルがないファイルを削除
+ * @param files ファイルパスのリスト
+ * @return ファイル削除の結果
+ */
+fn delete_no_meta_files(files: &Vec<String>) -> std::io::Result<Vec<String>> {
+    let mut deleted_files = Vec::new();
+    for file in files {
+        // metaファイルなら除外
+        if file.ends_with(".meta") {
+            continue;
+        }
+
+        let meta_path = file.clone() + ".meta";
+        if Path::new(&meta_path).exists() {
+            // metaファイルが存在するので除外
+            continue;
+        }
+
+        // metaファイルが存在しないので削除
+        fs::remove_file(file)?;
+        deleted_files.push(file.clone());
+    }
+
+    Ok(deleted_files)
+}
+
+/**
+ * @brief srcに削除したファイル名を結合する
+ * @param src ファイル名の結合先
+ * @param delete_files 削除したファイル名のリスト
+ * @return ファイル名の結合結果
+ */
+fn join_delete_files(src: &str, delete_files: &Vec<String>) -> String {
+    let mut text = String::from(src);
+    if delete_files.is_empty() {
+        return text;
+    }
+
+    text.push_str("\n");
+    text.push_str("====================================\n");
+    text.push_str("metaファイルがないため以下のファイルは削除されました\n");
+    for file in delete_files {
+        text.push_str(file);
+        text.push('\n');
+    }
+
+    text
+}
+
+/**
  * @breif zipを解凍してunityフォルダに展開
  * @param zip_file zipファイルの絶対パス
  * @param unity_foler unityフォルダの絶対パス
@@ -281,15 +331,21 @@ fn copy_zip_to_unity(zip_file: &str, unity_folder: &str) -> (bool, String) {
         }
     };
 
-    // assets_filesの中身をログに出す
-    for file in &assets_files {
-        println!("File: {}", file.as_str());
-    }
+    // netaファイルがないファイルを削除
+    let delete_files = match delete_no_meta_files(&assets_files) {
+        Ok(files) => files,
+        Err(_) => {
+            return (
+                false,
+                String::from("metaファイルがないファイルの削除に失敗"),
+            );
+        }
+    };
 
-    return (
-        true,
-        join_uncopy_files("正常に処理されました\n", &uncopy_files),
-    );
+    let mut result = join_delete_files("正常に処理されました\n", &delete_files);
+    result = join_uncopy_files(result.as_str(), &uncopy_files);
+
+    return (true, result);
 }
 
 /**
