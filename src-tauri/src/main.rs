@@ -151,8 +151,33 @@ fn join_uncopy_files(src: &str, uncopy_files: &Vec<String>) -> String {
  * @return ファイルパスのリスト
  */
 fn select_filepath(src_folder: &Path) -> std::io::Result<Vec<String>> {
-    let mut ans = Vec::new();
-    return Ok(ans);
+    // ファイルパスの格納先
+    let mut filepath_list = Vec::new();
+
+    // フォルダ内のファイルを取得
+    let entries = fs::read_dir(src_folder)?;
+
+    // フォルダ内を探索
+    for entry_result in entries {
+        // フォルダ内の要素を取得
+        let entry = entry_result?;
+
+        // パスに変換
+        let path = entry.path();
+
+        if path.is_dir() {
+            // フォルダ内のファイルを再帰的に探索
+            let sub_folder = path.clone();
+            let sub_filepath_list = select_filepath(&sub_folder)?;
+            filepath_list.extend(sub_filepath_list);
+            continue;
+        }
+
+        // ファイルパスをリストに追加
+        filepath_list.push(path.to_string_lossy().to_string());
+    }
+
+    return Ok(filepath_list);
 }
 
 /**
@@ -241,6 +266,24 @@ fn copy_zip_to_unity(zip_file: &str, unity_folder: &str) -> (bool, String) {
         Err(_) => {
             return (false, String::from("tempフォルダの削除に失敗"));
         }
+    }
+
+    // UnityのAssetsフォルダ内を探索
+    let unity_folder_path = Path::new(unity_folder);
+    let unity_assets_folder = unity_folder_path.join(assets_folder_name);
+    let assets_files = match select_filepath(&unity_assets_folder) {
+        Ok(files) => files,
+        Err(_) => {
+            return (
+                false,
+                String::from("UnityのAssetsフォルダ内のファイル探索に失敗"),
+            );
+        }
+    };
+
+    // assets_filesの中身をログに出す
+    for file in &assets_files {
+        println!("File: {}", file.as_str());
     }
 
     return (
