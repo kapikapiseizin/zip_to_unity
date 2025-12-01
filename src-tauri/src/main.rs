@@ -146,6 +146,16 @@ fn join_uncopy_files(src: &str, uncopy_files: &Vec<String>) -> String {
 }
 
 /**
+ * ファイルパスをフォルダから抽出
+ * @param src_folder フォルダの絶対パス
+ * @return ファイルパスのリスト
+ */
+fn select_filepath(src_folder: &Path) -> std::io::Result<Vec<String>> {
+    let mut ans = Vec::new();
+    return Ok(ans);
+}
+
+/**
  * @breif zipを解凍してunityフォルダに展開
  * @param zip_file zipファイルの絶対パス
  * @param unity_foler unityフォルダの絶対パス
